@@ -1,0 +1,56 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Practise
+{
+    // Implement the generic IComparable<T> interface.
+    class Program
+    {
+        class Product : IComparable<Product>
+        {
+            public string Name { get; private set; }
+            public decimal Price { get; private set; }
+
+            public Product(string producename, decimal itemPrice)
+            {
+                Name = producename;
+                Price = itemPrice;
+            }
+
+            public int CompareTo(Product product)
+            {
+                return Name.CompareTo(product.Name); //Sort by Name property.
+            }
+        }
+
+        static void Main(string[] args)
+        {
+            List<Product> products = new List<Product>();
+            products.Add(new Product("carrots", 0.48m));
+            products.Add(new Product("apples", 0.98m));
+            products.Add(new Product("bananas", 0.88m));
+            products.Add(new Product("dates", 0.53m));
+
+            ShowProducts("Before sorting:", products);
+            products.Sort(); // Apply the Sort () method of the List class.
+            ShowProducts("After sorting:", products);
+  
+            Console.ReadLine();
+
+        }
+
+    static void ShowProducts(string caption, List<Product> products)
+        {
+            Console.WriteLine(caption);
+            foreach(Product product in products)
+            {
+                Console.Write("  Product:  " + product.Name + "   ");
+                Console.WriteLine("Price:   " + product.Price.ToString("C"));
+            }
+            Console.WriteLine();
+        }
+    }
+}
